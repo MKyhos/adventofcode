@@ -9,8 +9,12 @@ input <- matrix(
   byrow = TRUE
 )
 
-# Rotate Matrix to make it easier
 
+
+# Dynamic programming approach:
+# Breaking down the problem in small steps, safe intermediate results
+# in appropriate auxiliary data structure (here: just another matrix of the
+# same dimension as the input, the "cost").
 minimumPath <- function(mat, n ,m, incr = 0) {
   st <- matrix(0 , nrow = n, ncol = m)
   for (i in 2:n)
