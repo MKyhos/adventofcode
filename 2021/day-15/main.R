@@ -41,6 +41,12 @@ minimumPathC <- function(mat, n, m) {
 minimumPath(input, dim, dim)
 minimumPathC(input, dim, dim)
 
+bench::mark(
+  minimumPath(input, dim, dim),
+  minimumPathC(input, dim, dim)
+)
+
+
 # Construct larger map
 
 # We can use the base function to construct a Kronecker sum, by first defining
@@ -53,10 +59,15 @@ sum_mat <- matrix(rep(0:4, 5) + rep(0:4, each = 5), byrow = TRUE, nrow = 5)
 
 input2 <- kronecker(sum_mat, input, FUN = "+") %% 9
 input2[input2 == 0] <- 9
+mode(input2) <- "integer"
 
 
 # Test input passes, however main input does not...
 
 minimumPath(input2, dim * 5, dim * 5)
+minimumPathC(input2, dim * 5, dim * 5)
 
-
+bench::mark(
+  minimumPath(input2, dim*5, dim*5),
+  minimumPathC(input2, dim*5, dim*5)
+)

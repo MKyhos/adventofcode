@@ -1,5 +1,4 @@
 TARGETS = $(patsubst %.c, %.so, $(shell find -type f -iname *.c))
-
 main: test
 test: $(TARGETS)
 	Rscript "test.R"
@@ -7,3 +6,7 @@ test: $(TARGETS)
 $(TARGETS): %.so: %.c
 	R CMD SHLIB -o $@ $<
 
+
+clean:
+	@rm ./*.o
+	@rm ./*.so
