@@ -30,8 +30,16 @@ minimumPath <- function(mat, n ,m, incr = 0) {
   return(st[n, m])
 }
 
-minimumPath(input, dim, dim)
+# C Version
 
+dyn.load("minimumPath.so")
+minimumPathC <- function(mat, n, m) {
+  .Call("minimumPath_", mat, as.integer(n), as.integer(m))
+}
+
+
+minimumPath(input, dim, dim)
+minimumPathC(input, dim, dim)
 
 # Construct larger map
 
